@@ -156,7 +156,7 @@ td.id{font-family:var(--mono);color:var(--muted);white-space:nowrap}
 .tablewrap{overflow:auto;border-radius:12px}
 .note{margin-top:18px;padding:14px 16px;border-left:4px solid var(--red);background:var(--navy-2);border-radius:0 10px 10px 0;font-size:.93rem}
 
-footer{background:var(--navy-3);border-top:3px solid var(--red);padding:38px 0 54px}
+footer{background:var(--navy-3);border-top:3px solid var(--red);padding:26px 0 40px}
 .disc{background:#1a0f1f;border:2px solid var(--red);border-radius:14px;padding:20px 24px}
 .disc h2{font-size:1.15rem;margin:0 0 8px;color:#fff}
 .disc ul{margin:0;padding-left:20px} .disc li{margin:6px 0;font-size:.93rem} .disc strong{color:#ff8a8a}
@@ -178,3 +178,19 @@ footer{background:var(--navy-3);border-top:3px solid var(--red);padding:38px 0 5
 }
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cur{animation:none}}
 .onote{color:var(--muted);font-size:.76rem;font-family:var(--mono);margin-left:6px}
+
+/* compact disclaimer */
+.minidisc{margin:26px 0 0;padding:8px 14px;border:1px solid var(--line);border-left:3px solid var(--amber);border-radius:8px;background:rgba(255,200,87,.04);font-size:.8rem;color:var(--muted);font-family:var(--mono);line-height:1.5}
+.minidisc p{margin:0}.minidisc b{color:var(--amber);font-weight:600}
+.minidisc ul{margin:8px 0 2px;padding-left:18px;font-family:var(--sans);font-size:.86rem}.minidisc li{margin:4px 0}.minidisc strong{color:var(--ink)}
+.linkbtn{background:none;border:0;padding:0 0 0 6px;color:var(--green);font:inherit;text-decoration:underline;cursor:pointer}
+/* progress bar */
+.pbar{padding:16px 18px 4px}
+.pbar-top{display:flex;justify-content:space-between;gap:12px;font-family:var(--mono);font-size:.9rem;color:var(--ink)}
+.pbar-top span{color:var(--green)}
+.pbar-track{height:12px;margin-top:10px;border-radius:999px;background:var(--navy-3);border:1px solid var(--line);overflow:hidden}
+.pbar-track span{display:block;height:100%;width:0;background:repeating-linear-gradient(135deg,var(--green) 0 10px,#4fc88a 10px 20px);background-size:28px 28px;border-radius:999px;transition:width .15s linear;animation:pstripe .9s linear infinite}
+.pbar-track.done span{animation:none;background:var(--green)}
+.pbar-sub{margin-top:8px;font-family:var(--mono);font-size:.76rem;color:var(--muted);min-height:1.2em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@keyframes pstripe{to{background-position:28px 0}}
+@media (prefers-reduced-motion:reduce){.pbar-track span{animation:none}}

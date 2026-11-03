@@ -121,7 +121,7 @@ code{background:rgba(110,118,129,.4);border-radius:6px;padding:.2em .4em;font-si
 .readme .bar .nm{display:flex;gap:8px;align-items:center;font-weight:600}
 .md{padding:32px 40px 40px}
 .md .hero{display:flex;gap:28px;align-items:center;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--bd)}
-.md .hero img{width:156px;height:156px;border-radius:50%;border:2px solid var(--bd);flex:none}
+.md .hero img{width:156px;height:156px;border-radius:22px;box-shadow:0 0 28px rgba(61,255,122,.18);border:2px solid var(--bd);flex:none}
 .md h1{font-size:2.25em;margin:0 0 8px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
 .md h1 .acc{color:var(--red)}
 .md h2{font-size:1.5em;font-weight:600;padding-bottom:.3em;border-bottom:1px solid var(--bd);margin:32px 0 16px;line-height:1.25}
@@ -211,6 +211,14 @@ code{background:rgba(110,118,129,.4);border-radius:6px;padding:.2em .4em;font-si
 .contrib{display:flex;gap:8px;align-items:center}
 .contrib img{width:32px;height:32px;border-radius:50%;border:1px solid var(--bd)}
 
+.md h3.stp{display:flex;flex-wrap:wrap;align-items:center;gap:10px;font-size:1.1em;font-weight:600;margin:28px 0 12px}
+.md ol.stl{padding-left:22px;margin:0 0 14px}.md ol.stl li{margin:4px 0}
+.md p.exb{margin:0 0 14px}.md p.exb img{max-width:100%;height:auto;display:block;border-radius:12px}
+.codeblock #badgeMd{display:block;white-space:pre-wrap;word-break:break-all;padding-right:84px}
+footer .comp{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-bottom:14px;padding:10px 14px;border:1px solid var(--bd);border-left:.25em solid var(--org);border-radius:0 6px 6px 0;background:rgba(210,153,34,.06);color:var(--fg);font-size:13px}
+footer details{margin:0 0 16px}
+footer summary{cursor:pointer;color:var(--blue);font-size:13px;padding:2px 0}
+footer details[open] summary{margin-bottom:10px}
 footer{max-width:1280px;margin:40px auto 0;padding:24px 32px 56px;border-top:1px solid var(--bd);color:var(--mut);font-size:12px}
 footer .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
 footer .links a{color:var(--mut)}
@@ -327,6 +335,7 @@ footer p{margin:0 0 6px}
   <nav class="tabs" aria-label="Site sections">
     <a class="tab on" href="#top"><svg width="16" height="16"><use href="#i-code"/></svg>Home</a>
     <a class="tab ok" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a>
+    <a class="tab" href="#add"><svg width="16" height="16"><use href="#i-code"/></svg>Add to your repo</a>
     <a class="tab" href="#roadmap"><svg width="16" height="16"><use href="#i-proj"/></svg>Roadmap</a>
     <a class="tab" href="#buy"><svg width="16" height="16"><use href="#i-book"/></svg>How to buy</a>
     <a class="tab" href="#tokenomics"><svg width="16" height="16"><use href="#i-graph"/></svg>Tokenomics</a>
@@ -347,13 +356,13 @@ footer p{margin:0 0 6px}
 
   <div class="box">
     <div class="commit-bar">
-      <img src="logo.jpg" alt=""><strong>pushy</strong>
-      <span class="msg">feat: Pushy Score v1 — live</span>
+      <img src="pp-avatar.jpg" alt=""><strong>pushy</strong>
+      <span class="msg">feat: Pushy Score v1.1 — live</span>
       <span class="r"><span class="st live"><svg width="12" height="12"><use href="#i-check"/></svg>Live</span><code>a1b2c3d</code></span>
     </div>
     <table class="ft">
-      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="score/">score</a></td><td><a href="score/">Pushy Score v1: scan AI skill &amp; MCP repos</a></td><td><span class="st live">live</span></td></tr>
-      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#pr">.github/workflows</a></td><td><a href="#pr">pushy-score.yml: fails the build if you force push</a></td><td>&nbsp;</td></tr>
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="score/">score</a></td><td><a href="score/">Pushy Score v1.1: full-repo scans of AI skill &amp; MCP repos</a></td><td><span class="st live">live</span></td></tr>
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#add">.github/workflows</a></td><td><a href="#add">pushy-score.yml: GitHub Action preview, not released yet</a></td><td><span class="st nxt">soon</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#about">README.md</a></td><td><a href="#about">it's a meme coin, not an audit</a></td><td>&nbsp;</td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">AI deep scan, Commit Roast Card, Ship Log, Rescue</a></td><td><span class="st bld">building</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">HOW_TO_BUY.md</a></td><td><a href="#buy">four steps, fewer than your last merge conflict</a></td><td>&nbsp;</td></tr>
@@ -367,12 +376,12 @@ footer p{margin:0 0 6px}
     <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>README.md</span></div>
     <article class="md">
       <div class="hero">
-        <img src="logo.jpg" alt="Pushy the hamster pressing the big red force-push button" width="156" height="156">
+        <img src="pp-avatar.jpg" alt="Pushy the hamster, drawn in green ASCII on a CRT screen" width="156" height="156">
         <div>
           <h1><span class="acc">$</span>FORCEPUSH</h1>
           <p class="tagline">Pushy scans your AI skills before you force push them.</p>
           <div class="badges" aria-label="Badges">
-            <span class="bdg"><i>pushy score</i><b class="g">v1 live</b></span>
+            <span class="bdg"><i>pushy score</i><b class="g">v1.1 live</b></span>
             <span class="bdg"><i>coin</i><b class="o">meme</b></span>
             <span class="bdg"><i>audit</i><b class="r">no</b></span>
             <span class="bdg"><i>financial advice</i><b class="r">not</b></span>
@@ -416,7 +425,7 @@ footer p{margin:0 0 6px}
       <p>Every skill repo deserves a status check. Paste yours at <a href="score/">Pushy Score</a> and read the findings before you install anything.</p>
       <div class="checks" aria-label="Example Pushy Score check result">
         <div class="ch"><span class="big"><svg width="18" height="18"><use href="#i-x"/></svg></span><div><strong>Some checks were not successful</strong><small>1 failing · 2 passing · example output for illustration</small></div></div>
-        <div class="chk pushy-row"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><img class="pushy-img" src="logo.jpg" alt="" style="vertical-align:middle;margin-right:8px"><b>Pushy Score</b> <em>— 19/100 · Do NOT force push this 🔴</em></span><span class="dt"><a href="score/">Details</a></span></div>
+        <div class="chk pushy-row"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><img class="pushy-img" src="pp-avatar.jpg" alt="" style="vertical-align:middle;margin-right:8px"><b>Pushy Score</b> <em>— 19/100 · Do NOT force push this 🔴</em></span><span class="dt"><a href="score/">Details</a></span></div>
         <div class="chk"><span class="ic g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span class="n"><b>Secrets</b> <em>— no keys or tokens found</em></span><span class="dt"><span class="st live">pass</span></span></div>
         <div class="chk"><span class="ic g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span class="n"><b>Docs &amp; upkeep</b> <em>— README and license present</em></span><span class="dt"><span class="st live">pass</span></span></div>
         <div class="chk"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><b>SKILL.md:12</b> <em>— fetches and follows remote instructions</em></span><span class="dt"><span class="st bad">critical</span></span></div>
@@ -438,10 +447,46 @@ footer p{margin:0 0 6px}
     </div>
   </section>
 
+  <section class="box readme" id="add" style="margin-top:24px">
+    <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>ADD_PUSHY.md</span></div>
+    <article class="md" style="padding-top:24px">
+      <h2 style="margin-top:0">Add Pushy to your repo</h2>
+      <p>Two steps. The first works today and runs in your browser. The second is a preview and is <b>not released</b>.</p>
+
+      <h3 class="stp"><span class="st live">live today</span> Step 1: scan, then add the badge</h3>
+      <ol class="stl">
+        <li>Scan your public repo at <a href="score/">Pushy Score</a>.</li>
+        <li>Copy the badge markdown it gives you, and commit the downloaded <code>pushy-score.svg</code> to your repo root.</li>
+        <li>Paste the markdown into your README. It looks like this (example, not your score):</li>
+      </ol>
+      <div class="codeblock"><button class="btn cp" id="badgeCopy" type="button"><svg width="14" height="14"><use href="#i-copy"/></svg>Copy</button><span id="badgeMd">[![Pushy Score 97/100 (commit 194cc86, 2026-11-03)](pushy-score.svg)](https://forcepushcoin.github.io/score/)</span></div>
+      <p class="exb"><img src="score/example-badge.svg" alt="Example Pushy Score badge: 97/100, safe to push. Example only." width="400" height="76"></p>
+      <p style="color:var(--mut);font-size:14px;margin:0 0 8px">The badge is a <b>static snapshot</b> of one commit, not a live badge. Rescan after you push. It is an automated scan, not an audit.</p>
+      <div class="btn-row"><a class="btn green" href="score/">Scan a repo — free</a></div>
+
+      <h3 class="stp"><span class="st nxt">coming soon · not live</span> Step 2: Pushy GitHub Action</h3>
+      <div class="alert note"><div class="ah"><svg width="16" height="16"><use href="#i-info"/></svg>Not released yet</div>
+        <p style="font-size:14px;margin:0">The Pushy GitHub Action will run an automatic scan and post a PR comment on every pull request. It will work on <b>private repos</b> because it runs in your own GitHub Actions, so your code never leaves your repo. No date, no promises. Nothing below exists yet.</p></div>
+      <div class="codeblock" aria-label="Preview of a future workflow file, not released yet"><span class="c"># preview, not released yet: this action does not exist today</span>
+<span class="c"># .github/workflows/pushy-score.yml</span>
+<span class="k">name</span>: Pushy Score
+<span class="k">on</span>: pull_request
+<span class="k">permissions</span>:
+  <span class="k">contents</span>: read
+  <span class="k">pull-requests</span>: write
+<span class="k">jobs</span>:
+  <span class="k">pushy</span>:
+    <span class="k">runs-on</span>: ubuntu-latest
+    <span class="k">steps</span>:
+      - <span class="k">uses</span>: actions/checkout@v4
+      - <span class="k">uses</span>: forcepushcoin/pushy-action@v1  <span class="c"># placeholder name</span></div>
+    </article>
+  </section>
+
   <section class="box" id="roadmap" style="margin-top:24px">
     <div class="bar"><svg width="16" height="16"><use href="#i-git"/></svg><strong>Commits</strong><span class="m">· roadmap, hobby plans, no dates, no promises</span></div>
     <div class="date">Free tools built for fun. Plans change.</div>
-    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1</div><div class="ds">Rule-based scanner for AI skill &amp; MCP repos. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
+    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1.1</div><div class="ds">Rule-based scanner for AI skill &amp; MCP repos. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
     <div class="cm bld"><span class="gl"></span><div><div class="ti">wip: AI deep scan</div><div class="ds">An optional second opinion on files the rules can't judge. Never replaces the rule-based score.</div></div><div class="rt"><span class="st bld">BUILDING</span><span class="sha">e4f5a6b</span></div></div>
     <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Commit Roast Card</div><div class="ds">A shareable card that gently roasts your commit history.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
     <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Ship Log</div><div class="ds">A changelog from your merged PRs.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
@@ -503,7 +548,7 @@ footer p{margin:0 0 6px}
   </div>
   <div class="blk">
     <h3>Releases</h3>
-    <div class="rel"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Score v1</span><span class="st live">Latest</span></div>
+    <div class="rel"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Score v1.1</span><span class="st live">Latest</span></div>
     <p style="color:var(--mut);font-size:12.5px;margin:6px 0 0">Rule-based, runs in your browser.</p>
   </div>
   <div class="blk">
@@ -519,7 +564,9 @@ footer p{margin:0 0 6px}
 </main>
 
 <footer id="disclaimer">
-  <div class="alert" style="margin-bottom:20px"><div class="ah"><svg width="16" height="16"><use href="#i-warn"/></svg>Warning · Disclaimer</div>
+  <div class="comp"><span><b>Meme coin, no intrinsic value, not financial advice</b> · Only trust the CA pinned on @forcepushcoin</span></div>
+  <details id="fulldisc"><summary>Read full disclaimer</summary>
+    <div class="alert" style="margin-bottom:0"><div class="ah"><svg width="16" height="16"><use href="#i-warn"/></svg>Warning · Disclaimer</div>
     <p style="font-size:15px;color:var(--fg)"><b>Meme coin, no intrinsic value, not financial advice.</b></p>
     <ul style="margin:0;padding-left:20px;color:#c9d1d9;font-size:13.5px;line-height:1.6">
       <li>$FORCEPUSH is a <b>meme coin</b> created for entertainment. It has <b>no intrinsic value</b> and <b>no expected return</b>.</li>
@@ -530,6 +577,7 @@ footer p{margin:0 0 6px}
       <li><b>Only trust the contract address pinned on the official X account.</b> Beware of fake tokens, look-alike sites and DMs. We will never ask for your seed phrase or private keys.</li>
       <li>Crypto rules differ by country. You are responsible for following the laws that apply to you. Do your own research.</li>
     </ul></div>
+  </details>
   <div class="links"><a href="score/">Pushy Score</a><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">X</a><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a><a href="#buy">How to buy</a></div>
   <p><b style="color:var(--fg)">Parody, not affiliated with GitHub.</b> This page only imitates the look of a repository page for fun. $FORCEPUSH is not affiliated with or endorsed by GitHub, Git, Solana, Phantom, pump.fun or any other company. All names belong to their owners.</p>
   <p>Made with questionable judgment. 🐹🔴</p>
@@ -556,6 +604,12 @@ const CONFIG = {
   var p=document.getElementById('pumpLink');
   if(CONFIG.PUMP_URL){p.href=CONFIG.PUMP_URL;p.target='_blank';p.textContent='pump.fun page';p.removeAttribute('aria-disabled');}
   else p.addEventListener('click',function(e){e.preventDefault();say('pump.fun page: coming soon.');});
+  var bc=document.getElementById('badgeCopy'),bm=document.getElementById('badgeMd');
+  if(bc)bc.addEventListener('click',function(){var t=bm.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){say('Badge markdown copied. Example score: scan your own repo for the real one.');},function(){var r=document.createRange();r.selectNodeContents(bm);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Press Ctrl/Cmd+C to copy.');});});
+  var fd=document.getElementById('fulldisc');
+  function openDisc(){if(location.hash==='#disclaimer'&&fd)fd.open=true;}
+  window.addEventListener('hashchange',openDisc);openDisc();
+  document.querySelectorAll('a[href="#disclaimer"]').forEach(function(a){a.addEventListener('click',function(){if(fd)fd.open=true;});});
 })();
 </script>
 </body>
