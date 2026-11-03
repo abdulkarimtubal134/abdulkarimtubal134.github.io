@@ -322,7 +322,7 @@ footer p{margin:0 0 6px}
   <img class="logo" src="pp-avatar.jpg" alt="Pushy the hamster in green ASCII on a CRT" width="32" height="32">
   <div class="crumb"><a href="#top"><b>forcepushcoin</b></a> <span style="color:var(--mut)">/</span> <a href="#top"><b>forcepush</b></a></div>
   <div class="search" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg>Search is decorative, scan a repo instead<kbd>/</kbd></div>
-  <div class="acts"><a class="ico-btn" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a><a class="ico-btn" data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">@forcepushcoin</a></div>
+  <div class="acts"><a class="ico-btn" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a><a class="ico-btn" href="roast/"><svg width="16" height="16"><use href="#i-play"/></svg>Roast</a><a class="ico-btn" data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">@forcepushcoin</a></div>
 </div>
 
 <div class="repohead" id="top">
@@ -337,6 +337,7 @@ footer p{margin:0 0 6px}
   <nav class="tabs" aria-label="Site sections">
     <a class="tab on" href="#top"><svg width="16" height="16"><use href="#i-code"/></svg>Home</a>
     <a class="tab ok" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a>
+    <a class="tab ok" href="roast/"><svg width="16" height="16"><use href="#i-play"/></svg>Roast</a>
     <a class="tab" href="#add"><svg width="16" height="16"><use href="#i-code"/></svg>Add to your repo</a>
     <a class="tab" href="#roadmap"><svg width="16" height="16"><use href="#i-proj"/></svg>Roadmap</a>
     <a class="tab" href="#buy"><svg width="16" height="16"><use href="#i-book"/></svg>How to buy</a>
@@ -364,9 +365,10 @@ footer p{margin:0 0 6px}
     </div>
     <table class="ft">
       <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="score/">score</a></td><td><a href="score/">Pushy Score v1.1: full-repo scans of AI skill &amp; MCP repos</a></td><td><span class="st live">live</span></td></tr>
-      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#add">.github/workflows</a></td><td><a href="#add">pushy-score.yml: GitHub Action preview, not released yet</a></td><td><span class="st nxt">soon</span></td></tr>
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="roast/">roast</a></td><td><a href="roast/">Commit Roast Card: a funny shareable card from your commits</a></td><td><span class="st live">live</span></td></tr>
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#add">.github/workflows</a></td><td><a href="#add">pushy.yml: the Pushy GitHub Action (v1)</a></td><td><span class="st live">live</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#about">README.md</a></td><td><a href="#about">it's a meme coin, not an audit</a></td><td>&nbsp;</td></tr>
-      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">Action, AI Deep Scan, Roast Card, Watchlist, Bounties…</a></td><td><span class="st bld">building</span></td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">AI Deep Scan, Watchlist, Bounties, Ship Log…</a></td><td><span class="st bld">building</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">HOW_TO_BUY.md</a></td><td><a href="#buy">four steps, fewer than your last merge conflict</a></td><td>&nbsp;</td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#tokenomics">TOKENOMICS.md</a></td><td><a href="#tokenomics">1B fixed supply, fair launch, no presale</a></td><td>&nbsp;</td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">CA.txt</a></td><td><a href="#buy">coming soon</a></td><td><span class="st nxt">soon</span></td></tr>
@@ -453,7 +455,7 @@ footer p{margin:0 0 6px}
     <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>ADD_PUSHY.md</span></div>
     <article class="md" style="padding-top:24px">
       <h2 style="margin-top:0">Add Pushy to your repo</h2>
-      <p>Two steps. The first works today and runs in your browser. The second is a preview and is <b>not released</b>.</p>
+      <p>Two steps, both live. The first runs in your browser. The second runs in your own GitHub Actions.</p>
 
       <h3 class="stp"><span class="st live">live today</span> Step 1: scan, then add the badge</h3>
       <ol class="stl">
@@ -466,13 +468,13 @@ footer p{margin:0 0 6px}
       <p style="color:var(--mut);font-size:14px;margin:0 0 8px">The badge is a <b>static snapshot</b> of one commit, not a live badge. Rescan after you push. It is an automated scan, not an audit.</p>
       <div class="btn-row"><a class="btn green" href="score/">Scan a repo — free</a></div>
 
-      <h3 class="stp"><span class="st bld">building · not live</span> Step 2: Pushy GitHub Action</h3>
-      <div class="alert note"><div class="ah"><svg width="16" height="16"><use href="#i-info"/></svg>Not released yet</div>
-        <p style="font-size:14px;margin:0">The Pushy GitHub Action will run an automatic scan and post a PR comment on every pull request. It will work on <b>private repos</b> because it runs in your own GitHub Actions, so your code never leaves your repo. No date, no promises. Nothing below exists yet.</p></div>
-      <div class="codeblock" aria-label="Preview of a future workflow file, not released yet"><span class="c"># preview, not released yet: this action does not exist today</span>
-<span class="c"># .github/workflows/pushy-score.yml</span>
-<span class="k">name</span>: Pushy Score
-<span class="k">on</span>: pull_request
+      <h3 class="stp"><span class="st live">live</span> Step 2: Pushy GitHub Action</h3>
+      <p style="margin:0 0 12px">Save as <code>.github/workflows/pushy.yml</code>. Works on public and private repos. Your code never leaves GitHub Actions. It posts a sticky PR comment with the score and findings.</p>
+      <div class="codeblock" aria-label="Workflow file .github/workflows/pushy.yml"><button class="btn cp" id="wfCopy" type="button"><svg width="14" height="14"><use href="#i-copy"/></svg>Copy</button><span id="wfYaml"><span class="k">name</span>: Pushy
+<span class="k">on</span>:
+  <span class="k">pull_request</span>:
+  <span class="k">push</span>:
+    <span class="k">branches</span>: [main]
 <span class="k">permissions</span>:
   <span class="k">contents</span>: read
   <span class="k">pull-requests</span>: write
@@ -481,7 +483,11 @@ footer p{margin:0 0 6px}
     <span class="k">runs-on</span>: ubuntu-latest
     <span class="k">steps</span>:
       - <span class="k">uses</span>: actions/checkout@v4
-      - <span class="k">uses</span>: forcepushcoin/pushy-action@v1  <span class="c"># placeholder name</span></div>
+      - <span class="k">uses</span>: forcepushcoin/pushy@v1
+        <span class="k">with</span>:
+          <span class="k">fail-under</span>: <span class="s">'70'</span></span></div>
+      <p style="color:var(--mut);font-size:14px;margin:0 0 8px">Inputs: <code>fail-under</code> (fail the check below this score), <code>comment</code>, <code>github-token</code>. Still an automated scan, not an audit.</p>
+      <div class="btn-row"><a class="btn green ext" href="https://github.com/forcepushcoin/pushy/blob/main/docs/ACTION.md" target="_blank" rel="noopener noreferrer">Action docs</a><a class="btn ext" href="https://github.com/forcepushcoin/pushy/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer">Release v1.0.0</a></div>
     </article>
   </section>
 
@@ -489,11 +495,11 @@ footer p{margin:0 0 6px}
     <div class="bar"><svg width="16" height="16"><use href="#i-git"/></svg><strong>Commits</strong><span class="m">· roadmap, hobby plans, no dates, no promises</span></div>
     <div class="date">Free tools built for fun. Plans change.</div>
     <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1.1</div><div class="ds">Free full-repo scans and a README badge. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
-    <div class="cm bld"><span class="gl"></span><div><div class="ti">wip: Pushy GitHub Action</div><div class="ds">Auto scan + PR comment on every pull request. Works on private repos because it runs in your own GitHub Actions. Free. <a href="#add">Preview →</a></div></div><div class="rt"><span class="st bld">BUILDING</span><span class="sha">e4f5a6b</span></div></div>
+    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy GitHub Action</div><div class="ds">Auto scan + sticky PR comment on every pull request. Works on private repos because it runs in your own GitHub Actions. Free. <a href="#add">Add it →</a> · <a href="https://github.com/forcepushcoin/pushy/releases/tag/v1.0.0" target="_blank" rel="noopener noreferrer">Release ↗</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">v1.0.0</span></div></div>
+    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Commit Roast Card</div><div class="ds">A funny shareable card from your commit history. The basic card is free and runs in your browser. <a href="roast/">Try it →</a> Premium themes are planned, not live.</div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">v1.0.0</span></div></div>
     <div class="cm nxs"><span class="gl"></span><div><div class="ti">next: AI Deep Scan</div><div class="ds">AI reads the files the rules can't judge and explains them. Pay with $FORCEPUSH or USDC. Extra report only, never changes the score.</div></div><div class="rt"><span class="st nxs">NEXT</span></div></div>
-    <div class="cm nxs"><span class="gl"></span><div><div class="ti">next: Commit Roast Card</div><div class="ds">A funny shareable card from your commit history. Basic is free, premium themes unlockable with $FORCEPUSH.</div></div><div class="rt"><span class="st nxs">NEXT</span></div></div>
     <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Watchlist &amp; alerts</div><div class="ds">Get notified when a repo you follow makes a risky change. A few repos free, more with $FORCEPUSH.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
-    <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Bounty board</div><div class="ds">Submit new rules or false-positive fixes. Accepted ones get $FORCEPUSH rewards from a community pool.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Bounty board</div><div class="ds">Submit new rules or false-positive fixes. Accepted ones get $FORCEPUSH rewards from a community pool. Rules are drafted; the pool wallet does not exist yet.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
     <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Ship Log &amp; Rescue</div><div class="ds">Auto summaries of project updates, and fix suggestions for broken skills.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
     <div style="padding:12px 16px;border-top:1px solid var(--bd2);font-size:13.5px;color:var(--fg)"><b>Token never buys a better score.</b> Plans, not promises: no dates. Anything marked Next or Later is planned, not live.</div>
     <div style="padding:12px 16px;border-top:1px solid var(--bd2);color:var(--mut);font-size:13px">Basic scans are free and never need the token. Planned: Pushy AI deep scans payable in $FORCEPUSH. Paying never changes a score. Not a financial product, no expected return.</div>
@@ -549,12 +555,14 @@ footer p{margin:0 0 6px}
     <div class="row"><svg width="16" height="16"><use href="#i-link"/></svg><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">x.com/forcepushcoin</a></div>
     <div class="row"><svg width="16" height="16"><use href="#i-code"/></svg><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source: forcepushcoin/pushy ↗</a></div>
     <div class="row"><svg width="16" height="16"><use href="#i-play"/></svg><a href="score/">Pushy Score (free scanner)</a></div>
+    <div class="row"><svg width="16" height="16"><use href="#i-play"/></svg><a href="roast/">Commit Roast Card (free, for fun)</a></div>
     <div class="row"><svg width="16" height="16"><use href="#i-shield"/></svg><a href="#disclaimer">Meme coin · not financial advice</a></div>
   </div>
   <div class="blk">
     <h3>Releases</h3>
-    <div class="rel"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Score v1.1</span><span class="st live">Latest</span></div>
-    <p style="color:var(--mut);font-size:12.5px;margin:6px 0 0">Rule-based, runs in your browser.</p>
+    <div class="rel"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Action v1.0.0</span><span class="st live">Latest</span></div>
+    <div class="rel" style="margin-top:6px"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Score v1.1</span></div>
+    <p style="color:var(--mut);font-size:12.5px;margin:6px 0 0">Rule-based. Score runs in your browser, the Action in your GitHub Actions.</p>
   </div>
   <div class="blk">
     <h3>Contributors</h3>
@@ -583,7 +591,7 @@ footer p{margin:0 0 6px}
       <li>Crypto rules differ by country. You are responsible for following the laws that apply to you. Do your own research.</li>
     </ul></div>
   </details>
-  <div class="links"><a href="score/">Pushy Score</a><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">X</a><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a><a href="#buy">How to buy</a></div>
+  <div class="links"><a href="score/">Pushy Score</a><a href="roast/">Roast</a><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">X</a><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a><a href="#buy">How to buy</a></div>
   <p><b style="color:var(--fg)">Parody, not affiliated with GitHub.</b> This page only imitates the look of a repository page for fun. $FORCEPUSH is not affiliated with or endorsed by GitHub, Git, Solana, Phantom, pump.fun or any other company. All names belong to their owners.</p>
   <p>Made with questionable judgment. 🐹🔴</p>
 </footer>
@@ -611,6 +619,8 @@ const CONFIG = {
   else p.addEventListener('click',function(e){e.preventDefault();say('pump.fun page: coming soon.');});
   var bc=document.getElementById('badgeCopy'),bm=document.getElementById('badgeMd');
   if(bc)bc.addEventListener('click',function(){var t=bm.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){say('Badge markdown copied. Example score: scan your own repo for the real one.');},function(){var r=document.createRange();r.selectNodeContents(bm);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Press Ctrl/Cmd+C to copy.');});});
+  var wc=document.getElementById('wfCopy'),wy=document.getElementById('wfYaml');
+  if(wc)wc.addEventListener('click',function(){var t=wy.textContent;(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){say('Workflow copied. Save it as .github/workflows/pushy.yml');},function(){var r=document.createRange();r.selectNodeContents(wy);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Press Ctrl/Cmd+C to copy.');});});
   var fd=document.getElementById('fulldisc');
   function openDisc(){if(location.hash==='#disclaimer'&&fd)fd.open=true;}
   window.addEventListener('hashchange',openDisc);openDisc();
