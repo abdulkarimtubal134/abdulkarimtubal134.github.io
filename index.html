@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>$FORCEPUSH — Pushy scans your AI skills before you force push them</title>
+<meta name="description" content="$FORCEPUSH is a Solana meme coin with a free tool: Pushy Score, an in-browser risk scan for AI agent skills and MCP server repos. Automated scan, not an audit. Meme coin, no intrinsic value, not financial advice.">
+<meta name="theme-color" content="#0d1117">
+<link rel="canonical" href="https://forcepushcoin.github.io/">
+<link rel="icon" type="image/jpeg" href="pp-avatar.jpg">
+<link rel="apple-touch-icon" href="pp-avatar.jpg">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="$FORCEPUSH">
+<meta property="og:url" content="https://forcepushcoin.github.io/">
+<meta property="og:title" content="$FORCEPUSH — Pushy scans your AI skills before you force push them">
+<meta property="og:description" content="A meme coin with a free, in-browser risk scanner for AI skill and MCP repos. Automated scan, not an audit. Not financial advice.">
+<meta property="og:image" content="https://forcepushcoin.github.io/banner-16x9.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
+<meta property="og:image:alt" content="Pushy the hamster terminal banner: REJECTED to FORCED, Pushy Score scanning">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@forcepushcoin">
+<meta name="twitter:title" content="$FORCEPUSH — Pushy scans your AI skills before you force push them">
+<meta name="twitter:description" content="A meme coin with a free, in-browser risk scanner for AI skill and MCP repos. Automated scan, not an audit. Not financial advice.">
+<meta name="twitter:image" content="https://forcepushcoin.github.io/banner-16x9.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#0d1117; --sub:#161b22; --inset:#010409; --bd:#30363d; --bd2:#21262d;
+  --fg:#e6edf3; --mut:#8b949e; --blue:#4493f8; --grn:#3fb950; --gbtn:#238636; --gbtn2:#2ea043; --red:#f85149; --org:#d29922; --pur:#ab7df8;
+  --addbg:rgba(46,160,67,.15); --addln:rgba(46,160,67,.35); --delbg:rgba(248,81,73,.15); --delln:rgba(248,81,73,.35);
+  --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{background:var(--canvas);scroll-behavior:smooth}
+body{margin:0;background:var(--canvas);color:var(--fg);font:14px/1.5 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+svg{fill:currentColor;vertical-align:text-bottom;flex:none}
+.mono,code,pre{font-family:var(--mono)}
+code{background:rgba(110,118,129,.4);border-radius:6px;padding:.2em .4em;font-size:85%}
+
+/* global header */
+.gh{background:var(--sub);border-bottom:1px solid var(--bd);padding:12px 32px;display:flex;align-items:center;gap:16px}
+.gh .logo{width:32px;height:32px;border-radius:50%;border:2px solid var(--bd);object-fit:cover}
+.gh .crumb{font-size:14px;color:var(--fg);display:flex;gap:6px;align-items:center;white-space:nowrap}
+.gh .crumb a{color:var(--fg)}
+.gh .crumb b{font-weight:600}
+.gh .search{margin-left:auto;display:flex;align-items:center;gap:8px;border:1px solid var(--bd);border-radius:6px;padding:5px 12px;color:var(--mut);min-width:260px;font-size:14px}
+.gh .search kbd{margin-left:auto;border:1px solid var(--bd);border-radius:4px;padding:0 6px;font:12px var(--mono)}
+.gh .acts{display:flex;gap:8px}
+.ico-btn{border:1px solid var(--bd);border-radius:6px;padding:5px 10px;color:var(--fg);display:inline-flex;gap:6px;align-items:center;font-size:13px;background:transparent}
+
+/* repo head */
+.repohead{background:var(--canvas);padding:12px 32px 0;border-bottom:1px solid var(--bd)}
+.title-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.title-row .rn{font-size:20px;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.title-row .rn a{color:var(--blue)}
+.title-row .rn strong{font-weight:600}
+.label{border:1px solid var(--bd);border-radius:2em;padding:0 8px;font-size:12px;font-weight:500;color:var(--mut);line-height:22px;display:inline-block}
+.tr-actions{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(240,246,252,.1);background:#212830;color:var(--fg);padding:3px 12px;font:500 12px/20px var(--sans);border-radius:6px;cursor:pointer;white-space:nowrap}
+.btn:hover{background:#262c36;text-decoration:none;border-color:#8b949e}
+.btn.green{background:var(--gbtn);color:#fff;border-color:rgba(240,246,252,.1);font-size:14px;padding:5px 16px}
+.btn.green:hover{background:var(--gbtn2)}
+.btn.big{font-size:14px;padding:6px 18px}
+.btn[disabled]{opacity:.5;cursor:not-allowed}
+.tabs{display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{display:flex;gap:8px;align-items:center;padding:8px 12px;color:var(--fg);font-size:14px;position:relative;white-space:nowrap;border-radius:6px;margin-bottom:6px}
+.tab:hover{background:rgba(110,118,129,.1);text-decoration:none}
+.tab.on{font-weight:600}
+.tab.on::after{content:"";position:absolute;left:8px;right:8px;bottom:-7px;height:2px;border-radius:6px;background:#f78166}
+.tab svg{color:var(--mut)}
+.tab .c{background:rgba(110,118,129,.4);border-radius:2em;padding:0 6px;font-size:12px;line-height:18px}
+.tab.ok{color:var(--grn)}.tab.ok svg{color:var(--grn)}
+
+/* layout */
+.page{max-width:1280px;margin:0 auto;padding:16px 32px 0;display:grid;grid-template-columns:minmax(0,1fr) 296px;gap:24px}
+.box{border:1px solid var(--bd);border-radius:6px;background:var(--canvas);overflow:hidden}
+.box + .box,.box + section,section + .box{margin-top:24px}
+.bar{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--sub);border-bottom:1px solid var(--bd);font-size:14px;flex-wrap:wrap}
+.bar strong{font-weight:600}
+.bar .sp{margin-left:auto}
+.bar .m{color:var(--mut)}
+.branch{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+
+/* banner */
+.banner{display:flex;align-items:center;gap:12px;flex-wrap:wrap;border:1px solid rgba(210,153,34,.4);background:rgba(187,128,9,.1);border-radius:6px;padding:6px 16px;margin-bottom:16px}
+.banner .t{font-weight:600}
+.banner .btn{margin-left:auto}
+
+/* file table */
+.commit-bar{display:flex;align-items:center;gap:10px;padding:10px 16px;background:var(--sub);border-bottom:1px solid var(--bd);font-size:13px;flex-wrap:wrap}
+.commit-bar img{width:20px;height:20px;border-radius:50%}
+.commit-bar .msg{color:var(--fg);font-weight:600}
+.commit-bar .r{margin-left:auto;color:var(--mut);display:flex;gap:8px;align-items:center}
+.ft{width:100%;border-collapse:collapse}
+.ft td{padding:5px 16px;border-top:1px solid var(--bd2);font-size:14px;white-space:nowrap}
+.ft tr:first-child td{border-top:0}
+.ft tr:hover td{background:rgba(110,118,129,.07)}
+.ft td:first-child{width:36%}
+.ft td:nth-child(2){width:46%;white-space:normal;color:var(--mut);overflow:hidden;text-overflow:ellipsis}
+.ft td:last-child{text-align:right;color:var(--mut)}
+.ft a{color:var(--fg)}
+.ft td:nth-child(2) a{color:var(--mut)}
+.ft a:hover{color:var(--blue)}
+.ft svg.f{color:var(--mut);margin-right:10px}
+.ft svg.d{color:#7d8590;margin-right:10px}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:500;border-radius:2em;padding:0 8px;line-height:20px;border:1px solid}
+.st.live{color:var(--grn);border-color:rgba(63,185,80,.45);background:rgba(63,185,80,.1)}
+.st.bld{color:var(--org);border-color:rgba(210,153,34,.45);background:rgba(210,153,34,.1)}
+.st.nxt{color:var(--mut);border-color:var(--bd)}
+.st.bad{color:var(--red);border-color:rgba(248,81,73,.45);background:rgba(248,81,73,.1)}
+
+/* readme */
+.readme .bar{padding:8px 16px;gap:12px}
+.readme .bar .nm{display:flex;gap:8px;align-items:center;font-weight:600}
+.md{padding:32px 40px 40px}
+.md .hero{display:flex;gap:28px;align-items:center;padding-bottom:24px;margin-bottom:24px;border-bottom:1px solid var(--bd)}
+.md .hero img{width:156px;height:156px;border-radius:50%;border:2px solid var(--bd);flex:none}
+.md h1{font-size:2.25em;margin:0 0 8px;font-weight:700;letter-spacing:-.02em;line-height:1.2}
+.md h1 .acc{color:var(--red)}
+.md h2{font-size:1.5em;font-weight:600;padding-bottom:.3em;border-bottom:1px solid var(--bd);margin:32px 0 16px;line-height:1.25}
+.md p{margin:0 0 16px;font-size:16px}
+.md .tagline{font-size:20px;color:var(--fg);margin:0 0 14px;font-weight:500}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px}
+.bdg{display:inline-flex;font:600 11.5px/20px "Inter",sans-serif;border-radius:3px;overflow:hidden;box-shadow:0 0 0 1px rgba(255,255,255,.04)}
+.bdg i{font-style:normal;padding:0 7px;background:#4c4f54;color:#fff}
+.bdg b{padding:0 7px;color:#fff;font-weight:600}
+.bdg b.g{background:#2ea043}.bdg b.r{background:#da3633}.bdg b.o{background:#9e6a03}.bdg b.b{background:#1f6feb}
+.md ul.task{list-style:none;padding:0;margin:0 0 16px}
+.md ul.task li{display:flex;gap:10px;align-items:flex-start;margin:6px 0;font-size:16px}
+.md ul.task input{margin-top:6px;accent-color:var(--blue);pointer-events:none}
+.md ul.task .num{color:var(--mut);font:12px var(--mono);margin-top:4px}
+.md blockquote{margin:0 0 16px;padding:0 1em;color:var(--mut);border-left:.25em solid var(--bd)}
+.alert{border-left:.25em solid var(--org);padding:8px 16px;margin:0 0 16px;background:rgba(210,153,34,.06);border-radius:0 6px 6px 0}
+.alert .ah{display:flex;gap:8px;align-items:center;color:var(--org);font-weight:600;margin-bottom:6px}
+.alert p{margin:0 0 6px;font-size:15px}
+.alert.note{border-color:var(--blue);background:rgba(68,147,248,.06)}.alert.note .ah{color:var(--blue)}
+
+/* CI check card */
+.checks{border:1px solid var(--bd);border-radius:6px;margin:0 0 16px;overflow:hidden}
+.checks .ch{display:flex;gap:12px;align-items:center;padding:12px 16px;background:var(--sub);border-bottom:1px solid var(--bd)}
+.checks .ch .big{width:32px;height:32px;border-radius:50%;background:rgba(248,81,73,.15);color:var(--red);display:grid;place-items:center;flex:none}
+.checks .ch strong{display:block;font-size:14px}
+.checks .ch small{color:var(--mut);font-size:12.5px}
+.chk{display:grid;grid-template-columns:20px 1fr auto;gap:12px;align-items:center;padding:10px 16px;border-top:1px solid var(--bd2);font-size:14px}
+.chk:first-of-type{border-top:0}
+.chk .ic{display:grid;place-items:center}
+.chk .ic.r{color:var(--red)}.chk .ic.g{color:var(--grn)}.chk .ic.y{color:var(--org)}
+.chk .n{color:var(--fg)}.chk .n em{font-style:normal;color:var(--mut)}
+.chk .dt{display:flex;gap:10px;align-items:center}
+.chk .pushy-img{width:20px;height:20px;border-radius:4px}
+.pushy-row{background:rgba(248,81,73,.05)}
+.mergebox{padding:16px;background:var(--sub);border-top:1px solid var(--bd);display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.btn.dng{background:#da3633;border-color:rgba(240,246,252,.1);color:#fff;font-size:14px;padding:5px 16px}
+.btn.dng[disabled]{opacity:.55}
+
+/* diff */
+.diff{font:12px/20px var(--mono);border-top:1px solid var(--bd);overflow-x:auto}
+.diff .l{display:grid;grid-template-columns:48px 48px 20px minmax(0,1fr);min-width:560px}
+.diff .l span{padding:0 8px;white-space:pre-wrap}
+.diff .ln{color:var(--mut);text-align:right;user-select:none}
+.diff .hk{background:rgba(56,139,253,.15);color:var(--mut)}
+.diff .hk span{padding:0 8px}
+.diff .add{background:var(--addbg)}.diff .add .ln{background:var(--addln)}.diff .add .sg{color:#7ee787}
+.diff .del{background:var(--delbg)}.diff .del .ln{background:var(--delln)}.diff .del .sg{color:#ff7b72}
+.diff .ctx .ln{background:transparent}
+.diff .sg{padding:0 4px;text-align:center}
+.diff .del span:last-child b{background:rgba(248,81,73,.4);font-weight:400;border-radius:3px}
+.diff .add span:last-child b{background:rgba(46,160,67,.4);font-weight:400;border-radius:3px}
+
+/* commits */
+.cm{display:grid;grid-template-columns:20px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px 16px;border-top:1px solid var(--bd2)}
+.cm:first-of-type{border-top:0}
+.cm .gl{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;border:2px solid;font-size:0}
+.cm.live .gl{border-color:var(--grn);background:rgba(63,185,80,.2)}
+.cm.bld .gl{border-color:var(--org);background:rgba(210,153,34,.2)}
+.cm.nxt .gl{border-color:var(--bd);border-style:dashed}
+.cm .ti{font-weight:600;color:var(--fg);font-size:14.5px}
+.cm .ds{color:var(--mut);font-size:13px;margin-top:2px}
+.cm .rt{display:flex;gap:10px;align-items:center}
+.cm .sha{font:12px var(--mono);border:1px solid var(--bd);border-radius:6px;padding:2px 8px;color:var(--blue);background:var(--sub)}
+.date{padding:8px 16px;background:var(--canvas);color:var(--mut);font-size:13px;border-bottom:1px solid var(--bd2);display:flex;gap:8px;align-items:center}
+
+/* code block */
+.codeblock{position:relative;background:var(--sub);border:1px solid transparent;border-radius:6px;padding:16px;font:85% /1.45 var(--mono);overflow:auto;margin:0 0 16px;white-space:pre}
+.codeblock .cp{position:absolute;top:8px;right:8px}
+.codeblock .c{color:#8b949e}.codeblock .k{color:#ff7b72}.codeblock .s{color:#a5d6ff}.codeblock .y{color:#e3b341}
+
+/* sidebar */
+.side h3{font-size:16px;font-weight:600;margin:0 0 8px}
+.side .blk{padding:16px 0;border-bottom:1px solid var(--bd)}
+.side .blk:first-child{padding-top:0}
+.side .blk:last-child{border:0}
+.side p{margin:0 0 12px;font-size:14px}
+.side .row{display:flex;gap:8px;align-items:center;color:var(--mut);font-size:12.5px;margin:6px 0}
+.side .row a{color:var(--mut)}
+.side .row a:hover{color:var(--blue)}
+.topics{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0}
+.topic{background:rgba(56,139,253,.1);color:var(--blue);border-radius:2em;padding:0 10px;font-size:12px;font-weight:500;line-height:22px}
+.topic:hover{background:var(--blue);color:#fff;text-decoration:none}
+.rel{display:flex;gap:8px;align-items:center;margin-top:8px}
+.rel .tag{display:inline-flex;gap:6px;align-items:center;color:var(--grn);font-weight:600}
+.langbar{display:flex;height:8px;border-radius:6px;overflow:hidden;margin:8px 0 10px}
+.langbar i{display:block;height:100%}
+.contrib{display:flex;gap:8px;align-items:center}
+.contrib img{width:32px;height:32px;border-radius:50%;border:1px solid var(--bd)}
+
+footer{max-width:1280px;margin:40px auto 0;padding:24px 32px 56px;border-top:1px solid var(--bd);color:var(--mut);font-size:12px}
+footer .links{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:12px}
+footer .links a{color:var(--mut)}
+footer p{margin:0 0 6px}
+
+@media (max-width:1000px){
+  .page{grid-template-columns:minmax(0,1fr)}
+  .side .blk:nth-child(n+2){display:none}
+  .gh .search{display:none}
+}
+@media (max-width:700px){
+  .gh,.repohead,.page,footer{padding-left:16px;padding-right:16px}
+  .gh .acts{display:none}
+  .gh{padding-top:12px;padding-bottom:12px}
+  .gh .crumb{font-size:13px}
+  .title-row .rn{font-size:17px}
+  .tr-actions{margin-left:0;width:100%}
+  .md{padding:20px 16px 26px}
+  .md .hero{flex-direction:column;text-align:center;gap:16px}
+  .md .hero img{width:128px;height:128px}
+  .md h1{font-size:1.9em}
+  .badges{justify-content:center}
+  .ft td:nth-child(2){display:none}
+  .ft td:first-child{width:auto}
+  .cm{grid-template-columns:20px minmax(0,1fr)}
+  .cm .rt{grid-column:2}
+  .commit-bar .r{margin-left:0}
+  .chk{grid-template-columns:20px 1fr}.chk .dt{grid-column:2}
+  .banner .btn{margin-left:0}
+  .md ul.task li,.md p{font-size:15px}
+}
+
+/* parody notice strip */
+.notice{background:#010409;border-bottom:1px solid var(--bd);color:var(--mut);font-size:12px;padding:6px 32px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:center;text-align:center}
+.notice b{color:var(--fg);font-weight:600}
+/* avatar */
+.gh .logo{border-color:#1b3a25;box-shadow:0 0 0 2px rgba(61,255,122,.15)}
+/* crt figure */
+.crtfig>div{min-width:0}
+.crtfig{display:grid;grid-template-columns:minmax(0,260px) minmax(0,1fr);gap:28px;align-items:center;margin:0 0 16px}
+.crt{position:relative;border-radius:18px;padding:8px;background:#050f08;border:1px solid #1b3a25;box-shadow:0 0 0 5px #08140c,0 0 0 6px #1b3a25,0 0 40px rgba(61,255,122,.18);margin:0}
+.crt img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;border-radius:12px}
+.crt::after{content:"";position:absolute;inset:8px;border-radius:12px;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,0) 0,rgba(0,0,0,0) 2px,rgba(0,0,0,.22) 3px,rgba(0,0,0,0) 4px)}
+.crtfig p{margin:0 0 12px}
+.gterm{font:13px/1.65 var(--mono);background:#020b05;border:1px solid #14301d;border-radius:6px;padding:12px 14px;color:#7dffa5;text-shadow:0 0 6px rgba(61,255,122,.35);overflow:auto;white-space:pre}
+.gterm .d{color:#2f9a58}.gterm .y{color:#ffb627}
+/* table */
+.md table{border-collapse:collapse;width:100%;margin:0 0 16px;display:block;overflow-x:auto}
+.md th,.md td{border:1px solid var(--bd);padding:8px 14px;text-align:left;font-size:14.5px;vertical-align:top}
+.md th{background:var(--sub);font-weight:600}
+.md tr:nth-child(even) td{background:rgba(110,118,129,.06)}
+.md td:first-child{white-space:nowrap;font-weight:600;color:var(--fg)}
+.md .nb{background:rgba(110,118,129,.15);border:1px solid var(--bd);border-radius:6px;padding:10px 14px;font-size:14px;color:#c9d1d9;margin:0 0 16px}
+.btn.primary{background:var(--gbtn);color:#fff}
+.btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn.ext::after{content:"↗";opacity:.7;margin-left:2px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:#e6edf3;color:#0d1117;padding:9px 16px;border-radius:6px;font-weight:600;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%)}
+@media (max-width:700px){
+  .notice{padding:6px 16px}
+  .crtfig{grid-template-columns:minmax(0,1fr);justify-items:center}
+  .crt{width:240px}
+  .gterm{white-space:pre-wrap;word-break:break-word}
+  .crtfig>div{width:100%}
+  .btn-row{justify-content:center}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-file" viewBox="0 0 16 16"><path d="M2 1.75C2 .784 2.784 0 3.75 0h6.586c.464 0 .909.184 1.237.513l2.914 2.914c.329.328.513.773.513 1.237v9.586A1.75 1.75 0 0 1 13.25 16h-9.5A1.75 1.75 0 0 1 2 14.25Zm1.75-.25a.25.25 0 0 0-.25.25v12.5c0 .138.112.25.25.25h9.5a.25.25 0 0 0 .25-.25V6h-2.75A1.75 1.75 0 0 1 9 4.25V1.5Zm6.75.062V4.25c0 .138.112.25.25.25h2.688l-.011-.013-2.914-2.914-.013-.011Z"/></symbol>
+    <symbol id="i-dir" viewBox="0 0 16 16"><path d="M1.75 1A1.75 1.75 0 0 0 0 2.75v10.5C0 14.216.784 15 1.75 15h12.5A1.75 1.75 0 0 0 16 13.25v-8.5A1.75 1.75 0 0 0 14.25 3H7.5a.25.25 0 0 1-.2-.1l-.9-1.2C6.07 1.26 5.55 1 5 1H1.75Z"/></symbol>
+    <symbol id="i-x" viewBox="0 0 16 16"><path d="M3.72 3.72a.75.75 0 0 1 1.06 0L8 6.94l3.22-3.22a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l3.22 3.22a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-3.22 3.22a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042L6.94 8 3.72 4.78a.75.75 0 0 1 0-1.06Z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 16 16"><path d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"/></symbol>
+    <symbol id="i-dot" viewBox="0 0 16 16"><circle cx="8" cy="8" r="4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 16 16"><path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z"/></symbol>
+    <symbol id="i-code" viewBox="0 0 16 16"><path d="m11.28 3.22 4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L13.94 8l-3.72-3.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-6.56 0a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L2.06 8l3.72 3.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L.47 8.53a.75.75 0 0 1 0-1.06Z"/></symbol>
+    <symbol id="i-pr" viewBox="0 0 16 16"><path d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 16 16"><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Zm4.879-2.773 4.264 2.559a.25.25 0 0 1 0 .428l-4.264 2.559A.25.25 0 0 1 6 10.559V5.442a.25.25 0 0 1 .379-.215Z"/></symbol>
+    <symbol id="i-issue" viewBox="0 0 16 16"><path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"/><path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"/></symbol>
+    <symbol id="i-proj" viewBox="0 0 16 16"><path d="M1.75 0h12.5C15.216 0 16 .784 16 1.75v12.5A1.75 1.75 0 0 1 14.25 16H1.75A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0ZM1.5 1.75v12.5c0 .138.112.25.25.25H7.5v-13H1.75a.25.25 0 0 0-.25.25ZM9 14.5h5.25a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25H9Z"/></symbol>
+    <symbol id="i-book" viewBox="0 0 16 16"><path d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 16 16"><path d="M7.467.133a1.748 1.748 0 0 1 1.066 0l5.25 1.68A1.75 1.75 0 0 1 15 3.48V7c0 1.566-.32 3.182-1.303 4.682-.983 1.498-2.585 2.813-5.032 3.855a1.697 1.697 0 0 1-1.33 0c-2.447-1.042-4.049-2.357-5.032-3.855C1.32 10.182 1 8.566 1 7V3.48a1.75 1.75 0 0 1 1.217-1.667Zm.61 1.429a.25.25 0 0 0-.153 0l-5.25 1.68a.25.25 0 0 0-.174.238V7c0 1.358.275 2.666 1.057 3.86.784 1.194 2.121 2.34 4.366 3.297a.196.196 0 0 0 .154 0c2.245-.956 3.582-2.104 4.366-3.298C13.225 9.666 13.5 8.36 13.5 7V3.48a.251.251 0 0 0-.174-.237l-5.25-1.68ZM8.75 4.75v3a.75.75 0 0 1-1.5 0v-3a.75.75 0 0 1 1.5 0ZM9 10.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></symbol>
+    <symbol id="i-graph" viewBox="0 0 16 16"><path d="M1.5 1.75V13.5h13.75a.75.75 0 0 1 0 1.5H.75a.75.75 0 0 1-.75-.75V1.75a.75.75 0 0 1 1.5 0Zm14.28 2.53-5.25 5.25a.75.75 0 0 1-1.06 0L7 7.06 4.28 9.78a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042l3.25-3.25a.75.75 0 0 1 1.06 0L10 7.94l4.72-4.72a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042Z"/></symbol>
+    <symbol id="i-warn" viewBox="0 0 16 16"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 16 16"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 16 16"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"/><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"/></symbol>
+    <symbol id="i-git" viewBox="0 0 16 16"><path d="M9.5 3.25a2.25 2.25 0 1 1 3 2.122V6A2.5 2.5 0 0 1 10 8.5H6a1 1 0 0 0-1 1v1.128a2.251 2.251 0 1 1-1.5 0V5.372a2.25 2.25 0 1 1 1.5 0v1.836A2.493 2.493 0 0 1 6 7h4a1 1 0 0 0 1-1v-.628A2.25 2.25 0 0 1 9.5 3.25Zm-6 0a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Zm8.25-.75a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5ZM4.25 12a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Z"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 16 16"><path d="M1 7.775V2.75C1 1.784 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.752 1.752 0 0 1 1 7.775Zm1.5 0c0 .066.026.13.073.177l6.25 6.25a.25.25 0 0 0 .354 0l5.025-5.025a.25.25 0 0 0 0-.354l-6.25-6.25a.25.25 0 0 0-.177-.073H2.75a.25.25 0 0 0-.25.25ZM6 5a1 1 0 1 1 0 2 1 1 0 0 1 0-2Z"/></symbol>
+    <symbol id="i-link" viewBox="0 0 16 16"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"/></symbol>
+  </defs>
+</svg>
+
+<div class="notice" role="note"><span><b>This is not GitHub.</b> It's the $FORCEPUSH homepage, dressed up as a repo page for fun. Parody, not affiliated with GitHub.</span></div>
+<div class="gh">
+  <img class="logo" src="pp-avatar.jpg" alt="Pushy the hamster in green ASCII on a CRT" width="32" height="32">
+  <div class="crumb"><a href="#top"><b>forcepushcoin</b></a> <span style="color:var(--mut)">/</span> <a href="#top"><b>forcepush</b></a></div>
+  <div class="search" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 16 16"><path d="M10.68 11.74a6 6 0 0 1-7.922-8.982 6 6 0 0 1 8.982 7.922l3.04 3.04a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215ZM11.5 7a4.499 4.499 0 1 0-8.997 0A4.499 4.499 0 0 0 11.5 7Z"/></svg>Search is decorative, scan a repo instead<kbd>/</kbd></div>
+  <div class="acts"><a class="ico-btn" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a><a class="ico-btn" data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">@forcepushcoin</a></div>
+</div>
+
+<div class="repohead" id="top">
+  <div class="title-row">
+    <div class="rn"><svg width="16" height="16" style="color:var(--mut)"><use href="#i-book"/></svg><a href="#top">forcepushcoin</a> <span style="color:var(--mut)">/</span> <strong><a href="#top">forcepush</a></strong> <span class="label">Public</span></div>
+    <div class="tr-actions">
+      <a class="btn" data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer"><svg width="16" height="16"><use href="#i-link"/></svg>Follow on X</a>
+      <a class="btn ext" href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer"><svg width="16" height="16"><use href="#i-star"/></svg>Star the scanner</a>
+      <a class="btn green ext" href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer"><svg width="16" height="16"><use href="#i-code"/></svg>View source</a>
+    </div>
+  </div>
+  <nav class="tabs" aria-label="Site sections">
+    <a class="tab on" href="#top"><svg width="16" height="16"><use href="#i-code"/></svg>Home</a>
+    <a class="tab ok" href="score/"><svg width="16" height="16"><use href="#i-play"/></svg>Pushy Score</a>
+    <a class="tab" href="#roadmap"><svg width="16" height="16"><use href="#i-proj"/></svg>Roadmap</a>
+    <a class="tab" href="#buy"><svg width="16" height="16"><use href="#i-book"/></svg>How to buy</a>
+    <a class="tab" href="#tokenomics"><svg width="16" height="16"><use href="#i-graph"/></svg>Tokenomics</a>
+    <a class="tab" href="#pr"><svg width="16" height="16"><use href="#i-pr"/></svg>Pull request</a>
+    <a class="tab" href="#disclaimer"><svg width="16" height="16"><use href="#i-shield"/></svg>Disclaimer</a>
+  </nav>
+</div>
+
+<main class="page">
+<div class="main">
+
+  <div class="banner">
+    <svg width="16" height="16" style="color:var(--org)"><use href="#i-info"/></svg>
+    <span class="t">Pushy scans your AI skills before you force push them.</span>
+    <span style="color:var(--mut)">Free, in your browser. Automated scan, not an audit.</span>
+    <a class="btn primary" href="score/">Scan a repo →</a>
+  </div>
+
+  <div class="box">
+    <div class="commit-bar">
+      <img src="logo.jpg" alt=""><strong>pushy</strong>
+      <span class="msg">feat: Pushy Score v1 — live</span>
+      <span class="r"><span class="st live"><svg width="12" height="12"><use href="#i-check"/></svg>Live</span><code>a1b2c3d</code></span>
+    </div>
+    <table class="ft">
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="score/">score</a></td><td><a href="score/">Pushy Score v1: scan AI skill &amp; MCP repos</a></td><td><span class="st live">live</span></td></tr>
+      <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#pr">.github/workflows</a></td><td><a href="#pr">pushy-score.yml: fails the build if you force push</a></td><td>&nbsp;</td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#about">README.md</a></td><td><a href="#about">it's a meme coin, not an audit</a></td><td>&nbsp;</td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">AI deep scan, Commit Roast Card, Ship Log, Rescue</a></td><td><span class="st bld">building</span></td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">HOW_TO_BUY.md</a></td><td><a href="#buy">four steps, fewer than your last merge conflict</a></td><td>&nbsp;</td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#tokenomics">TOKENOMICS.md</a></td><td><a href="#tokenomics">1B fixed supply, fair launch, no presale</a></td><td>&nbsp;</td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">CA.txt</a></td><td><a href="#buy">coming soon</a></td><td><span class="st nxt">soon</span></td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#disclaimer">DISCLAIMER.md</a></td><td><a href="#disclaimer">meme coin, no intrinsic value, not financial advice</a></td><td>&nbsp;</td></tr>
+    </table>
+  </div>
+
+  <section class="box readme" id="about" style="margin-top:24px">
+    <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>README.md</span></div>
+    <article class="md">
+      <div class="hero">
+        <img src="logo.jpg" alt="Pushy the hamster pressing the big red force-push button" width="156" height="156">
+        <div>
+          <h1><span class="acc">$</span>FORCEPUSH</h1>
+          <p class="tagline">Pushy scans your AI skills before you force push them.</p>
+          <div class="badges" aria-label="Badges">
+            <span class="bdg"><i>pushy score</i><b class="g">v1 live</b></span>
+            <span class="bdg"><i>coin</i><b class="o">meme</b></span>
+            <span class="bdg"><i>audit</i><b class="r">no</b></span>
+            <span class="bdg"><i>financial advice</i><b class="r">not</b></span>
+            <span class="bdg"><i>chain</i><b class="b">solana</b></span>
+          </div>
+          <div class="btn-row"><a class="btn green" href="score/">Scan a repo — free</a><a class="btn ext" href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">View source</a></div>
+        </div>
+      </div>
+
+      <h2>About</h2>
+      <p>$FORCEPUSH is a Solana meme coin for developers with questionable judgment. Pushy the hamster ships a free dev tool, <b>Pushy Score</b>: paste a public GitHub repo of AI agent skills, prompts or an MCP server and get a <b>0–100 risk score</b>, findings with file and line, fix hints and a README badge. It runs in your browser: no account, no backend, nothing uploaded. <b>You don't need the token to use it</b>, and using it doesn't add value to the token.</p>
+
+      <div class="box" style="margin:0 0 16px">
+        <div class="bar"><svg width="16" height="16"><use href="#i-code"/></svg><strong>README.md</strong><span class="m">· what is this?</span><span class="sp"><span class="st live">+4</span> <span class="st bad">−3</span></span></div>
+        <div class="diff" role="img" aria-label="Diff showing the project description changing from an investment product to a meme coin">
+          <div class="l hk"><span></span><span></span><span></span><span>@@ -1,5 +1,5 @@ what is this?</span></div>
+          <div class="l del"><span class="ln">1</span><span class="ln"></span><span class="sg">−</span><span>A <b>serious investment product</b></span></div>
+          <div class="l add"><span class="ln"></span><span class="ln">1</span><span class="sg">+</span><span>A <b>meme coin about typing --force and hoping for the best</b></span></div>
+          <div class="l ctx"><span class="ln">2</span><span class="ln">2</span><span class="sg"> </span><span>Mascot: Pushy the hamster, navy hoodie, big red button</span></div>
+          <div class="l del"><span class="ln">3</span><span class="ln"></span><span class="sg">−</span><span>Reads <b>the review comments</b></span></div>
+          <div class="l add"><span class="ln"></span><span class="ln">3</span><span class="sg">+</span><span><b>Has never read</b> the review comments</span></div>
+          <div class="l del"><span class="ln">4</span><span class="ln"></span><span class="sg">−</span><span>Protected branch</span></div>
+          <div class="l add"><span class="ln"></span><span class="ln">4</span><span class="sg">+</span><span>Protected branch <b>(probably fine)</b></span></div>
+          <div class="l add"><span class="ln"></span><span class="ln">5</span><span class="sg">+</span><span><b>No intrinsic value. No expected return.</b></span></div>
+        </div>
+      </div>
+
+      <h2>Pushy, in ASCII</h2>
+      <div class="crtfig">
+        <figure class="crt"><img src="pp.jpg" alt="Pushy the hamster drawn in green ASCII characters on a CRT monitor" width="1024" height="1024" loading="lazy"></figure>
+        <div>
+          <p>Same hamster as the X profile picture. Hoodie, headphones, big red button. Pushy presses it so you don't have to, and has never read the review comments.</p>
+<div class="gterm"><span class="d">dev@main $</span> git push --force origin main
+<span class="d"> + a1b2c3d...e4f5a6b main -&gt; main (forced update)</span>
+<span class="y">Success.</span> Your teammates' commits have been deleted.
+<span class="d">They will find out at standup. 🐹</span></div>
+        </div>
+      </div>
+
+      <h2 id="score">Pushy Score as a CI check</h2>
+      <p>Every skill repo deserves a status check. Paste yours at <a href="score/">Pushy Score</a> and read the findings before you install anything.</p>
+      <div class="checks" aria-label="Example Pushy Score check result">
+        <div class="ch"><span class="big"><svg width="18" height="18"><use href="#i-x"/></svg></span><div><strong>Some checks were not successful</strong><small>1 failing · 2 passing · example output for illustration</small></div></div>
+        <div class="chk pushy-row"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><img class="pushy-img" src="logo.jpg" alt="" style="vertical-align:middle;margin-right:8px"><b>Pushy Score</b> <em>— 19/100 · Do NOT force push this 🔴</em></span><span class="dt"><a href="score/">Details</a></span></div>
+        <div class="chk"><span class="ic g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span class="n"><b>Secrets</b> <em>— no keys or tokens found</em></span><span class="dt"><span class="st live">pass</span></span></div>
+        <div class="chk"><span class="ic g"><svg width="16" height="16"><use href="#i-check"/></svg></span><span class="n"><b>Docs &amp; upkeep</b> <em>— README and license present</em></span><span class="dt"><span class="st live">pass</span></span></div>
+        <div class="chk"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><b>SKILL.md:12</b> <em>— fetches and follows remote instructions</em></span><span class="dt"><span class="st bad">critical</span></span></div>
+      </div>
+      <div class="alert note"><div class="ah"><svg width="16" height="16"><use href="#i-info"/></svg>Note</div><p><b>Automated scan, not an audit.</b> A high score means “none of our rules fired”, not “safe”. Blind spots are listed on every result.</p></div>
+    </article>
+  </section>
+
+  <section class="box" id="pr" style="margin-top:24px">
+    <div class="bar"><svg width="16" height="16" style="color:var(--grn)"><use href="#i-pr"/></svg><strong>feat: force push everything to main</strong><span class="m">#1</span><span class="sp"><span class="st live">Open</span></span></div>
+    <div style="padding:16px">
+      <p style="margin:0 0 14px;color:var(--mut);font-size:14px"><b style="color:var(--fg)">pushy</b> wants to merge 1 commit into <code>main</code> from <code>pushy/force</code></p>
+      <div class="checks" style="margin:0">
+        <div class="chk"><span class="ic r"><svg width="16" height="16"><use href="#i-x"/></svg></span><span class="n"><b>Pushy Score</b> <em>— 19/100, failing</em></span><span class="dt"><a href="score/">Details</a></span></div>
+        <div class="chk"><span class="ic y"><svg width="16" height="16"><use href="#i-warn"/></svg></span><span class="n"><b>Review required</b> <em>— Pushy has not read the review comments</em></span><span class="dt"></span></div>
+        <div class="chk"><span class="ic y"><svg width="16" height="16"><use href="#i-warn"/></svg></span><span class="n"><b>Branch protection</b> <em>— about to be bypassed with --force</em></span><span class="dt"></span></div>
+        <div class="mergebox"><button class="btn dng" type="button" disabled>Merge anyway</button><span style="color:var(--mut);font-size:13px">Pushy pressed it anyway. Don't be Pushy. Scan first.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="box" id="roadmap" style="margin-top:24px">
+    <div class="bar"><svg width="16" height="16"><use href="#i-git"/></svg><strong>Commits</strong><span class="m">· roadmap, hobby plans, no dates, no promises</span></div>
+    <div class="date">Free tools built for fun. Plans change.</div>
+    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1</div><div class="ds">Rule-based scanner for AI skill &amp; MCP repos. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
+    <div class="cm bld"><span class="gl"></span><div><div class="ti">wip: AI deep scan</div><div class="ds">An optional second opinion on files the rules can't judge. Never replaces the rule-based score.</div></div><div class="rt"><span class="st bld">BUILDING</span><span class="sha">e4f5a6b</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Commit Roast Card</div><div class="ds">A shareable card that gently roasts your commit history.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Ship Log</div><div class="ds">A changelog from your merged PRs.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Rescue</div><div class="ds">A checklist for when you <i>did</i> force push.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
+    <div style="padding:12px 16px;border-top:1px solid var(--bd2);color:var(--mut);font-size:13px">These are free tools, not a financial product. They don't require the token, and their existence does not add value to it. $FORCEPUSH has no utility and no expected return.</div>
+  </section>
+
+  <section class="box readme" id="buy" style="margin-top:24px">
+    <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>HOW_TO_BUY.md</span></div>
+    <article class="md" style="padding-top:24px">
+      <h2 style="margin-top:0">How to buy</h2>
+      <p>Fair launch on pump.fun, 1B fixed supply, no presale. Only if you understand the risk.</p>
+      <ul class="task">
+        <li><input type="checkbox" tabindex="-1" aria-hidden="true"><span><b>Get Phantom.</b> Install it from <a href="https://phantom.com" target="_blank" rel="noopener noreferrer">phantom.com</a>. Never share your seed phrase.</span></li>
+        <li><input type="checkbox" tabindex="-1" aria-hidden="true"><span><b>Buy some SOL.</b> From an exchange or inside Phantom. Keep extra for fees.</span></li>
+        <li><input type="checkbox" tabindex="-1" aria-hidden="true"><span><b>Open pump.fun.</b> Go to <a href="https://pump.fun" target="_blank" rel="noopener noreferrer">pump.fun</a> and connect your wallet.</span></li>
+        <li><input type="checkbox" tabindex="-1" aria-hidden="true"><span><b>Paste the CA.</b> Check it matches the address <b>pinned on X</b>, then swap. Look-alikes exist.</span></li>
+      </ul>
+      <h2>Contract address</h2>
+      <div class="codeblock"><button class="btn cp" id="caCopy" type="button" disabled aria-disabled="true"><svg width="14" height="14"><use href="#i-copy"/></svg>Copy</button><span class="c"># only the address pinned on the official X account counts</span>
+<span class="k">export</span> CA=<span class="y" id="caVal">"coming soon"</span></div>
+      <p style="color:var(--mut);font-size:14px;margin:0 0 14px">Nobody from $FORCEPUSH will ever DM you first or ask for your seed phrase. Look-alike tokens and sites exist.</p>
+      <div class="btn-row"><a class="btn" data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">X: @forcepushcoin</a><a class="btn" id="pumpLink" href="#buy" aria-disabled="true" rel="noopener noreferrer">pump.fun page (soon)</a></div>
+    </article>
+  </section>
+
+
+  <section class="box readme" id="tokenomics" style="margin-top:24px">
+    <div class="bar"><span class="nm"><svg width="16" height="16"><use href="#i-book"/></svg>TOKENOMICS.md</span></div>
+    <article class="md" style="padding-top:24px">
+      <h2 style="margin-top:0">Tokenomics</h2>
+      <p>Intentionally boring. There is nothing to read between the lines.</p>
+      <table>
+        <thead><tr><th>Item</th><th>Details</th></tr></thead>
+        <tbody>
+        <tr><td>Ticker</td><td><b>$FORCEPUSH</b> on Solana</td></tr>
+        <tr><td>Total supply</td><td><b>1,000,000,000</b> (1B), the fixed supply for tokens launched on pump.fun</td></tr>
+        <tr><td>Launch</td><td><b>Fair launch on pump.fun.</b> Everyone buys from the same bonding curve.</td></tr>
+        <tr><td>Presale</td><td><b>None.</b></td></tr>
+        <tr><td>Team wallet</td><td><b>Public.</b> The team wallet address will be posted here and pinned on X at launch, so anyone can check what it holds on-chain.</td></tr>
+        <tr><td>Creator fees</td><td>pump.fun pays the creator 0.30% of trading fees on the bonding curve. How it's used will be disclosed openly. See <a href="https://pump.fun/docs/fees" target="_blank" rel="noopener noreferrer">pump.fun fees</a>.</td></tr>
+        <tr><td>Utility</td><td><b>None.</b> It's a meme. The free tools on this site don't need the token and don't add value to it.</td></tr>
+        </tbody>
+      </table>
+    </article>
+  </section>
+
+</div>
+
+<aside class="side">
+  <div class="blk">
+    <h3>About</h3>
+    <p>Pushy scans your AI skills before you force push them. A Solana meme coin with a free, client-side scanner for AI skill &amp; MCP repos.</p>
+    <div class="topics"><a class="topic" href="#top">solana</a><a class="topic" href="#top">meme-coin</a><a class="topic" href="#top">mcp</a><a class="topic" href="#top">ai-agents</a><a class="topic" href="#top">pushy-score</a></div>
+    <div class="row"><svg width="16" height="16"><use href="#i-link"/></svg><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">x.com/forcepushcoin</a></div>
+    <div class="row"><svg width="16" height="16"><use href="#i-code"/></svg><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source: forcepushcoin/pushy ↗</a></div>
+    <div class="row"><svg width="16" height="16"><use href="#i-play"/></svg><a href="score/">Pushy Score (free scanner)</a></div>
+    <div class="row"><svg width="16" height="16"><use href="#i-shield"/></svg><a href="#disclaimer">Meme coin · not financial advice</a></div>
+  </div>
+  <div class="blk">
+    <h3>Releases</h3>
+    <div class="rel"><span class="tag"><svg width="16" height="16"><use href="#i-tag"/></svg>Pushy Score v1</span><span class="st live">Latest</span></div>
+    <p style="color:var(--mut);font-size:12.5px;margin:6px 0 0">Rule-based, runs in your browser.</p>
+  </div>
+  <div class="blk">
+    <h3>Contributors</h3>
+    <div class="contrib"><img src="pp-avatar.jpg" alt="Pushy"><span><b>pushy</b> <span style="color:var(--mut)">🐹</span></span></div>
+  </div>
+  <div class="blk">
+    <h3>Languages</h3>
+    <div class="langbar"><i style="width:100%;background:#f78166"></i></div>
+    <div class="row"><svg width="10" height="10" style="color:#f78166"><use href="#i-dot"/></svg><b style="color:var(--fg)">Questionable judgment</b> <span>100%</span></div>
+  </div>
+</aside>
+</main>
+
+<footer id="disclaimer">
+  <div class="alert" style="margin-bottom:20px"><div class="ah"><svg width="16" height="16"><use href="#i-warn"/></svg>Warning · Disclaimer</div>
+    <p style="font-size:15px;color:var(--fg)"><b>Meme coin, no intrinsic value, not financial advice.</b></p>
+    <ul style="margin:0;padding-left:20px;color:#c9d1d9;font-size:13.5px;line-height:1.6">
+      <li>$FORCEPUSH is a <b>meme coin</b> created for entertainment. It has <b>no intrinsic value</b> and <b>no expected return</b>.</li>
+      <li>The free tools on this site are hobby projects: no guarantees, no commitments, and no connection to the token's price. They don't need the token and don't add value to it.</li>
+      <li><b>Pushy Score is an automated scan, not an audit.</b> A high score means none of our rules fired, not that something is safe.</li>
+      <li>Nothing here is an offer, solicitation or recommendation to buy anything. This is <b>not financial advice</b>.</li>
+      <li>You can <b>lose all the money you put in</b>. Only spend what you can afford to lose.</li>
+      <li><b>Only trust the contract address pinned on the official X account.</b> Beware of fake tokens, look-alike sites and DMs. We will never ask for your seed phrase or private keys.</li>
+      <li>Crypto rules differ by country. You are responsible for following the laws that apply to you. Do your own research.</li>
+    </ul></div>
+  <div class="links"><a href="score/">Pushy Score</a><a data-x href="https://x.com/forcepushcoin" target="_blank" rel="noopener noreferrer">X</a><a href="https://github.com/forcepushcoin/pushy" target="_blank" rel="noopener noreferrer">Source</a><a href="#tokenomics">Tokenomics</a><a href="#roadmap">Roadmap</a><a href="#buy">How to buy</a></div>
+  <p><b style="color:var(--fg)">Parody, not affiliated with GitHub.</b> This page only imitates the look of a repository page for fun. $FORCEPUSH is not affiliated with or endorsed by GitHub, Git, Solana, Phantom, pump.fun or any other company. All names belong to their owners.</p>
+  <p>Made with questionable judgment. 🐹🔴</p>
+</footer>
+<div class="toast" id="toast" role="status"></div>
+<script>
+/* ===== CONFIG: edit these after launch, nothing else needs to change ===== */
+const CONFIG = {
+  CA: "",                                    // paste the real contract address here, e.g. "AbC...pump"
+  X_URL: "https://x.com/forcepushcoin",     // official X account
+  PUMP_URL: ""                               // e.g. "https://pump.fun/coin/<CA>"
+};
+/* ========================================================================= */
+(function(){
+  var val=document.getElementById('caVal'), btn=document.getElementById('caCopy'), toast=document.getElementById('toast');
+  function say(m){toast.textContent=m;toast.classList.add('show');clearTimeout(say.t);say.t=setTimeout(function(){toast.classList.remove('show')},2000);}
+  if(CONFIG.CA){ val.textContent='"'+CONFIG.CA+'"'; btn.disabled=false; btn.removeAttribute('aria-disabled'); }
+  btn.addEventListener('click',function(){
+    if(!CONFIG.CA){say('No contract address yet, nothing to copy.');return;}
+    (navigator.clipboard?navigator.clipboard.writeText(CONFIG.CA):Promise.reject()).then(function(){say('Copied. Double-check it against the pinned X post.');},function(){
+      var r=document.createRange();r.selectNodeContents(val);var s=getSelection();s.removeAllRanges();s.addRange(r);say('Press Ctrl/Cmd+C to copy.');});
+  });
+  if(CONFIG.X_URL){document.querySelectorAll('[data-x]').forEach(function(a){a.href=CONFIG.X_URL;});}
+  var p=document.getElementById('pumpLink');
+  if(CONFIG.PUMP_URL){p.href=CONFIG.PUMP_URL;p.target='_blank';p.textContent='pump.fun page';p.removeAttribute('aria-disabled');}
+  else p.addEventListener('click',function(e){e.preventDefault();say('pump.fun page: coming soon.');});
+})();
+</script>
+</body>
+</html>
