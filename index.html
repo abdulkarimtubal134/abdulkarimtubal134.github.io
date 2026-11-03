@@ -114,6 +114,7 @@ code{background:rgba(110,118,129,.4);border-radius:6px;padding:.2em .4em;font-si
 .st.live{color:var(--grn);border-color:rgba(63,185,80,.45);background:rgba(63,185,80,.1)}
 .st.bld{color:var(--org);border-color:rgba(210,153,34,.45);background:rgba(210,153,34,.1)}
 .st.nxt{color:var(--mut);border-color:var(--bd)}
+.st.nxs{color:var(--blue);border-color:rgba(68,147,248,.45);background:rgba(68,147,248,.1)}
 .st.bad{color:var(--red);border-color:rgba(248,81,73,.45);background:rgba(248,81,73,.1)}
 
 /* readme */
@@ -180,6 +181,7 @@ code{background:rgba(110,118,129,.4);border-radius:6px;padding:.2em .4em;font-si
 .cm .gl{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;border:2px solid;font-size:0}
 .cm.live .gl{border-color:var(--grn);background:rgba(63,185,80,.2)}
 .cm.bld .gl{border-color:var(--org);background:rgba(210,153,34,.2)}
+.cm.nxs .gl{border-color:var(--blue);border-style:dashed;background:rgba(68,147,248,.1)}
 .cm.nxt .gl{border-color:var(--bd);border-style:dashed}
 .cm .ti{font-weight:600;color:var(--fg);font-size:14.5px}
 .cm .ds{color:var(--mut);font-size:13px;margin-top:2px}
@@ -364,7 +366,7 @@ footer p{margin:0 0 6px}
       <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="score/">score</a></td><td><a href="score/">Pushy Score v1.1: full-repo scans of AI skill &amp; MCP repos</a></td><td><span class="st live">live</span></td></tr>
       <tr><td><svg class="d" width="16" height="16"><use href="#i-dir"/></svg><a href="#add">.github/workflows</a></td><td><a href="#add">pushy-score.yml: GitHub Action preview, not released yet</a></td><td><span class="st nxt">soon</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#about">README.md</a></td><td><a href="#about">it's a meme coin, not an audit</a></td><td>&nbsp;</td></tr>
-      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">AI deep scan, Commit Roast Card, Ship Log, Rescue</a></td><td><span class="st bld">building</span></td></tr>
+      <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#roadmap">ROADMAP.md</a></td><td><a href="#roadmap">Action, AI Deep Scan, Roast Card, Watchlist, Bounties…</a></td><td><span class="st bld">building</span></td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">HOW_TO_BUY.md</a></td><td><a href="#buy">four steps, fewer than your last merge conflict</a></td><td>&nbsp;</td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#tokenomics">TOKENOMICS.md</a></td><td><a href="#tokenomics">1B fixed supply, fair launch, no presale</a></td><td>&nbsp;</td></tr>
       <tr><td><svg class="f" width="16" height="16"><use href="#i-file"/></svg><a href="#buy">CA.txt</a></td><td><a href="#buy">coming soon</a></td><td><span class="st nxt">soon</span></td></tr>
@@ -464,7 +466,7 @@ footer p{margin:0 0 6px}
       <p style="color:var(--mut);font-size:14px;margin:0 0 8px">The badge is a <b>static snapshot</b> of one commit, not a live badge. Rescan after you push. It is an automated scan, not an audit.</p>
       <div class="btn-row"><a class="btn green" href="score/">Scan a repo — free</a></div>
 
-      <h3 class="stp"><span class="st nxt">coming soon · not live</span> Step 2: Pushy GitHub Action</h3>
+      <h3 class="stp"><span class="st bld">building · not live</span> Step 2: Pushy GitHub Action</h3>
       <div class="alert note"><div class="ah"><svg width="16" height="16"><use href="#i-info"/></svg>Not released yet</div>
         <p style="font-size:14px;margin:0">The Pushy GitHub Action will run an automatic scan and post a PR comment on every pull request. It will work on <b>private repos</b> because it runs in your own GitHub Actions, so your code never leaves your repo. No date, no promises. Nothing below exists yet.</p></div>
       <div class="codeblock" aria-label="Preview of a future workflow file, not released yet"><span class="c"># preview, not released yet: this action does not exist today</span>
@@ -486,11 +488,14 @@ footer p{margin:0 0 6px}
   <section class="box" id="roadmap" style="margin-top:24px">
     <div class="bar"><svg width="16" height="16"><use href="#i-git"/></svg><strong>Commits</strong><span class="m">· roadmap, hobby plans, no dates, no promises</span></div>
     <div class="date">Free tools built for fun. Plans change.</div>
-    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1.1</div><div class="ds">Rule-based scanner for AI skill &amp; MCP repos. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
-    <div class="cm bld"><span class="gl"></span><div><div class="ti">wip: AI deep scan</div><div class="ds">An optional second opinion on files the rules can't judge. Never replaces the rule-based score.</div></div><div class="rt"><span class="st bld">BUILDING</span><span class="sha">e4f5a6b</span></div></div>
-    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Commit Roast Card</div><div class="ds">A shareable card that gently roasts your commit history.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
-    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Ship Log</div><div class="ds">A changelog from your merged PRs.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
-    <div class="cm nxt"><span class="gl"></span><div><div class="ti">todo: Rescue</div><div class="ds">A checklist for when you <i>did</i> force push.</div></div><div class="rt"><span class="st nxt">NEXT · MAYBE</span></div></div>
+    <div class="cm live"><span class="gl"></span><div><div class="ti">feat: Pushy Score v1.1</div><div class="ds">Free full-repo scans and a README badge. Runs in your browser. <a href="score/">Try it →</a></div></div><div class="rt"><span class="st live">LIVE</span><span class="sha">a1b2c3d</span></div></div>
+    <div class="cm bld"><span class="gl"></span><div><div class="ti">wip: Pushy GitHub Action</div><div class="ds">Auto scan + PR comment on every pull request. Works on private repos because it runs in your own GitHub Actions. Free. <a href="#add">Preview →</a></div></div><div class="rt"><span class="st bld">BUILDING</span><span class="sha">e4f5a6b</span></div></div>
+    <div class="cm nxs"><span class="gl"></span><div><div class="ti">next: AI Deep Scan</div><div class="ds">AI reads the files the rules can't judge and explains them. Pay with $FORCEPUSH or USDC. Extra report only, never changes the score.</div></div><div class="rt"><span class="st nxs">NEXT</span></div></div>
+    <div class="cm nxs"><span class="gl"></span><div><div class="ti">next: Commit Roast Card</div><div class="ds">A funny shareable card from your commit history. Basic is free, premium themes unlockable with $FORCEPUSH.</div></div><div class="rt"><span class="st nxs">NEXT</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Watchlist &amp; alerts</div><div class="ds">Get notified when a repo you follow makes a risky change. A few repos free, more with $FORCEPUSH.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Bounty board</div><div class="ds">Submit new rules or false-positive fixes. Accepted ones get $FORCEPUSH rewards from a community pool.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
+    <div class="cm nxt"><span class="gl"></span><div><div class="ti">later: Ship Log &amp; Rescue</div><div class="ds">Auto summaries of project updates, and fix suggestions for broken skills.</div></div><div class="rt"><span class="st nxt">LATER</span></div></div>
+    <div style="padding:12px 16px;border-top:1px solid var(--bd2);font-size:13.5px;color:var(--fg)"><b>Token never buys a better score.</b> Plans, not promises: no dates. Anything marked Next or Later is planned, not live.</div>
     <div style="padding:12px 16px;border-top:1px solid var(--bd2);color:var(--mut);font-size:13px">Basic scans are free and never need the token. Planned: Pushy AI deep scans payable in $FORCEPUSH. Paying never changes a score. Not a financial product, no expected return.</div>
   </section>
 
